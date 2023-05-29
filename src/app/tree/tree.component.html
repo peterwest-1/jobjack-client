@@ -1,0 +1,38 @@
+<ul>
+  <li *ngFor="let item of data?.children">
+    <div class="border rounded mb-2">
+      <span
+        (click)="item.isDirectory && onPathClick(item)"
+        [ngClass]="{
+          'hover:border hover:rounded hover:cursor-pointer ': item.isDirectory
+        }"
+        class="font-bold"
+        >{{ item.name }}</span
+      >
+      <div *ngIf="item.isDirectory">
+        <app-folder-icon></app-folder-icon>
+      </div>
+      <div *ngIf="!item.isDirectory">
+        <app-file-icon></app-file-icon>
+      </div>
+      <div>
+        <p>{{ item.path }}</p>
+        <p>
+          {{ item.size / 1024 | number : "1.1-1" }}
+          <span class="font-semibold">KB</span>
+        </p>
+        <p>
+          <span class="font-semibold">Created At: </span
+          >{{ item.createdAt | date : "short" }}
+        </p>
+        <p *ngIf="item.extension">
+          <span class="font-semissbold">Extension </span>{{ item.extension }}
+        </p>
+      </div>
+
+      <ng-container *ngIf="item.isDirectory">
+        <app-tree [data]="item" (pathClick)="onPathClick($event)"></app-tree>
+      </ng-container>
+    </div>
+  </li>
+</ul>
