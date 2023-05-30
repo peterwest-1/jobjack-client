@@ -1,0 +1,10 @@
+fragment EntryResponse on EntryData {
+  name
+  link
+  path
+  size
+  extension
+  isDirectory
+  createdAt
+  permissions
+}
