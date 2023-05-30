@@ -1,54 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { EntryGQL, EntryQuery } from 'src/generated/graphql';
-import { FileFolder } from 'src/types';
 import { DirectoryService } from './directory.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'jobjack-client';
 
-  constructor(private service: DirectoryService, private entryGQL: EntryGQL) {
-    this.entry = this.entryGQL
-      .watch()
-      .valueChanges.pipe(map((result) => result.data.entry));
-
-    this.entry.subscribe((data) => {
-      this.data = data;
-    });
-  }
-
-  data: any;
-  error?: string;
+  constructor(private service: DirectoryService, private entryGQL: EntryGQL) {}
 
   entry: Observable<EntryQuery['entry']>;
+  error?: string;
 
-  // fetchData(): void {
-  //   this.service.fetchData().subscribe(
-  //     (data) => {
-  //       this.data = data;
-  //     },
-  //     (error) => {
-  //       this.error = error.message
-  //         ? error.message
-  //         : 'Error retrieving data. Please try again later.';
-  //     }
-  //   );
-  // }
+  //Consider putting in service?
+  private getEntryData(path?: string): void {
+    const query = this.entryGQL.watch({ path });
+    this.entry = query.valueChanges.pipe(
+      map((result) => result.data.entry),
+      catchError((error) => {
+        this.error = error || 'Error, probably shouldnt get here';
+
+        //Not exactly sure about this
+        return of({
+          name: '',
+          path: '',
+          isDirectory: false,
+          link: '',
+          size: -1,
+          extension: '',
+          createdAt: '',
+          children: [],
+        });
+      })
+    );
+  }
+
+  ngOnInit(): void {
+    this.getEntryData();
+  }
 
   onDirectoryPathChanged(path: string): void {
-    this.service.fetchDataWithPath(path).subscribe(
-      (data) => {
-        this.data = data;
-      },
-      (error) => {
-        this.error = error.message
-          ? error.message
-          : 'Error retrieving data. Please try again later.';
-      }
-    );
+    this.getEntryData(path);
   }
 }
