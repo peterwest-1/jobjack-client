@@ -1,20 +1,23 @@
 <ul>
   <li *ngFor="let item of data?.children">
     <div class="border rounded mb-2">
-      <span
-        (click)="item.isDirectory && onPathClick(item)"
-        [ngClass]="{
-          'hover:border hover:rounded hover:cursor-pointer ': item.isDirectory
-        }"
-        class="font-bold"
-        >{{ item.name }}</span
-      >
-      <div *ngIf="item.isDirectory">
-        <app-folder-icon></app-folder-icon>
+      <div class="flex flex-row gap-4 justify-center p-2">
+        <span
+          (click)="item.isDirectory && onPathClick(item)"
+          [ngClass]="{
+            'hover:border hover:rounded hover:cursor-pointer': item.isDirectory
+          }"
+          class="font-bold"
+          >{{ item.name }}</span
+        >
+        <div *ngIf="item.isDirectory">
+          <app-folder-icon></app-folder-icon>
+        </div>
+        <div *ngIf="!item.isDirectory">
+          <app-file-icon></app-file-icon>
+        </div>
       </div>
-      <div *ngIf="!item.isDirectory">
-        <app-file-icon></app-file-icon>
-      </div>
+
       <div>
         <p>{{ item.path }}</p>
         <p>

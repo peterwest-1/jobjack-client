@@ -1,0 +1,8 @@
+query Entry($path: String) {
+  entry(path: $path) {
+    ...EntryResponse
+    children {
+      ...EntryResponse
+    }
+  }
+}
