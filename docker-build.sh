@@ -12,7 +12,7 @@ if [[ -z $(git status --porcelain) ]]; then
     echo "New version: $newVersion"
 
     # You can use the $newVersion variable in your script as needed
-    docker build . -t peterwest86/jobjack-client:gql-$newVersion
+    docker build . -t peterwest86/jobjack-client:rest-$newVersion
 else
    echo "Working directory not clean"
 fi
