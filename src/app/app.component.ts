@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
 import { EntryGQL, EntryQuery } from 'src/generated/graphql';
@@ -9,6 +10,7 @@ import { DirectoryService } from './directory.service';
 })
 export class AppComponent implements OnInit {
   title = 'jobjack-client';
+
 
   constructor(private service: DirectoryService, private entryGQL: EntryGQL) {}
 

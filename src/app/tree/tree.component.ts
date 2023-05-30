@@ -6,7 +6,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./tree.component.scss'],
 })
 export class TreeComponent {
+
   @Input() data: any;
+
   @Output() pathClick: EventEmitter<string> = new EventEmitter<string>();
 
   onPathClick(item: any): void {
