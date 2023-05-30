@@ -1,10 +1,12 @@
-export interface FileFolder {
+export interface EntryData {
   name: string;
   path: string;
-  isDirectory: boolean;
-  link: string;
   size: number;
   extension: string;
-  createdAt: string;
-  children?: FileFolder[];
+  createdAt: Date;
+  isDirectory: boolean;
+  link: string;
+  children?: EntryData[];
+  hasChildren?: boolean;
+  permissions?: string;
 }
