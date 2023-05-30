@@ -42,7 +42,7 @@ export type EntryData = {
   link: Scalars['String']['output'];
   name: Scalars['String']['output'];
   path: Scalars['String']['output'];
-  permissions?: Maybe<Scalars['String']['output']>;
+  permissions?: Maybe<Scalars['Boolean']['output']>;
   size: Scalars['Float']['output'];
 };
 
@@ -64,7 +64,7 @@ export type EntryResponseFragment = {
   extension: string;
   isDirectory: boolean;
   createdAt: any;
-  permissions?: string | null;
+  permissions?: boolean | null;
 };
 
 export type EntryQueryVariables = Exact<{
@@ -82,7 +82,7 @@ export type EntryQuery = {
     extension: string;
     isDirectory: boolean;
     createdAt: any;
-    permissions?: string | null;
+    permissions?: boolean | null;
     children?: Array<{
       __typename?: 'EntryData';
       name: string;
@@ -92,7 +92,7 @@ export type EntryQuery = {
       extension: string;
       isDirectory: boolean;
       createdAt: any;
-      permissions?: string | null;
+      permissions?: boolean | null;
     }> | null;
   };
 };
