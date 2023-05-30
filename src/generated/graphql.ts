@@ -34,14 +34,15 @@ export type Scalars = {
 
 export type EntryData = {
   __typename?: 'EntryData';
-  children: Array<EntryData>;
+  children?: Maybe<Array<EntryData>>;
   createdAt: Scalars['DateTime']['output'];
   extension: Scalars['String']['output'];
-  hasChildren: Scalars['Boolean']['output'];
+  hasChildren?: Maybe<Scalars['Boolean']['output']>;
   isDirectory: Scalars['Boolean']['output'];
   link: Scalars['String']['output'];
   name: Scalars['String']['output'];
   path: Scalars['String']['output'];
+  permissions?: Maybe<Scalars['String']['output']>;
   size: Scalars['Float']['output'];
 };
 
@@ -63,6 +64,7 @@ export type EntryResponseFragment = {
   extension: string;
   isDirectory: boolean;
   createdAt: any;
+  permissions?: string | null;
 };
 
 export type EntryQueryVariables = Exact<{
@@ -80,7 +82,8 @@ export type EntryQuery = {
     extension: string;
     isDirectory: boolean;
     createdAt: any;
-    children: Array<{
+    permissions?: string | null;
+    children?: Array<{
       __typename?: 'EntryData';
       name: string;
       link: string;
@@ -89,7 +92,8 @@ export type EntryQuery = {
       extension: string;
       isDirectory: boolean;
       createdAt: any;
-    }>;
+      permissions?: string | null;
+    }> | null;
   };
 };
 
@@ -102,6 +106,7 @@ export const EntryResponseFragmentDoc = gql`
     extension
     isDirectory
     createdAt
+    permissions
   }
 `;
 export const EntryDocument = gql`

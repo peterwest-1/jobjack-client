@@ -6,4 +6,5 @@ fragment EntryResponse on EntryData {
   extension
   isDirectory
   createdAt
+  permissions
 }

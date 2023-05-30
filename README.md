@@ -5,6 +5,8 @@
 - [ ] Perhaps a back button
 - [ ] Scrolling without moving header
 
+- [ ] Mobile
+
 ## Default Angular Stuff
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
