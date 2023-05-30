@@ -1,15 +1,8 @@
 #!/bin/bash
 
-# Navigate to the directory where your npm project is located
-
-
-
-
 # Check if the Git working directory is clean
 if [[ -z $(git status --porcelain) ]]; then
-  echo "Working directory is clean"
-else
-  # Run the npm version patch command and capture the output
+ 
     version=$(npm version patch)
 
     # Extract the version number from the output
@@ -19,7 +12,9 @@ else
     echo "New version: $newVersion"
 
     # You can use the $newVersion variable in your script as needed
-
+    docker build . -t peterwest86/jobjack-client:gql-$newVersion
+else
+   echo "Working directory not clean"
 fi
 
 exit 0
