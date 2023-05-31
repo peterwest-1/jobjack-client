@@ -16,14 +16,13 @@ COPY . .
 # Build the Angular app
 RUN npm run build
 
-# Use a lightweight Nginx image as the base image for the production stage
-FROM nginx:latest
 
-# Copy the built Angular app to the Nginx image
-COPY --from=builder /app/dist/jobjack-client /usr/share/nginx/html
-
-# Expose the default Nginx port
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+FROM nginx:alpine
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=builder /app/dist/angular-nginx-docker .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
