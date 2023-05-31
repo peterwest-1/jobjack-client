@@ -14,19 +14,17 @@ RUN npm ci
 COPY . .
 
 # Build the Angular app
-RUN npm run build --prod
+RUN npm run build 
 
-EXPOSE 4200
+EXPOSE 80
 
-CMD ["npm", "start"]
-
-## Commenting out because I dont know what Im doing nhere
-# FROM nginx:alpine
-# # Set working directory to nginx asset directory
-# WORKDIR /usr/share/nginx/html
-# # Remove default nginx static assets
-# RUN rm -rf ./*
-# # Copy static assets from builder stage
-# COPY --from=builder /app/dist/jobjack-client .
-# # Containers run nginx with global directives and daemon off
-# ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Commenting out because I dont know what Im doing nhere
+FROM nginx:alpine
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=builder /app/dist/jobjack-client .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
