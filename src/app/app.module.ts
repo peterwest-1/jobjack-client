@@ -18,12 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { PaginationGroupComponent } from './pagination-group/pagination-group.component';
 import { FileFolderIconComponent } from './file-folder-icon/file-folder-icon.component';
 import { FileFolderListItemComponent } from './file-folder-list-item/file-folder-list-item.component';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'flat', component: FlatComponent },
-  { path: 'tree', component: TreeComponent },
-];
+import { NavGroupComponent } from './nav-group/nav-group.component';
+import { routes } from 'src/routes';
 
 @NgModule({
   declarations: [
@@ -38,6 +34,7 @@ const routes: Routes = [
     PaginationGroupComponent,
     FileFolderIconComponent,
     FileFolderListItemComponent,
+    NavGroupComponent,
   ],
   imports: [
     BrowserModule,
