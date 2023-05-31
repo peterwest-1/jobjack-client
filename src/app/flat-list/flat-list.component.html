@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let item of data">
+    <app-file-folder-list-item
+      [item]="item"
+      (pathUpdated)="pathUpdatedFromListItem($event)"
+    ></app-file-folder-list-item>
+  </li>
+</ul>

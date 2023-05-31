@@ -1,4 +1,4 @@
-fragment EntryResponse on EntryData {
+fragment EntryFlatResponse on EntryFlat {
   name
   link
   path

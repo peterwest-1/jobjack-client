@@ -1,0 +1,10 @@
+fragment EntryTreeResponse on EntryTree {
+  name
+  link
+  path
+  size
+  extension
+  isDirectory
+  createdAt
+  permissions
+}

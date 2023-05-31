@@ -1,0 +1,8 @@
+query EntryTree($path: String) {
+  entryTree(path: $path) {
+    ...EntryTreeResponse
+    children {
+      ...EntryTreeResponse
+    }
+  }
+}

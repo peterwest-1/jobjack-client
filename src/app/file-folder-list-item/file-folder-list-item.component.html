@@ -1,0 +1,31 @@
+<div class="border rounded mb-2">
+  <div class="flex flex-row gap-4 justify-center p-2">
+    <span
+      (click)="item.isDirectory && pathUpdatedFromListItem(item)"
+      [ngClass]="{
+        'hover:border hover:rounded hover:cursor-pointer': item.isDirectory
+      }"
+      class="font-bold w-full"
+      >{{ item.name }}</span
+    >
+    <app-file-folder-icon
+      [isDirectory]="item.isDirectory"
+    ></app-file-folder-icon>
+  </div>
+
+  <div>
+    <p>{{ item.path }}</p>
+    <p>{{ item.permissions }}</p>
+    <p>
+      {{ item.size / 1024 | number : "1.1-1" }}
+      <span class="font-semibold">KB</span>
+    </p>
+    <p>
+      <span class="font-semibold">Created At: </span
+      >{{ item.createdAt | date : "short" }}
+    </p>
+    <p *ngIf="item.extension">
+      <span class="font-semissbold">Extension </span>{{ item.extension }}
+    </p>
+  </div>
+</div>

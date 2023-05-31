@@ -1,0 +1,25 @@
+<div class="mb-6">
+  <div class="flex lg:flex-row flex-col gap-4">
+    <input
+      type="text"
+      id="item-input"
+      #newItem
+      class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-neutral-500 focus:border-neutral-500 block w-full p-2.5"
+      placeholder="path e.g. src/helpers"
+      required
+      (input)="checkInputValue()"
+      [(ngModel)]="inputValue"
+    />
+    <button
+      type="button"
+      [disabled]="isInputEmpty"
+      (click)="addNewItem(newItem.value)"
+      class="border border-gray-300 hover:bg-neutral-200 focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+      [ngClass]="{
+        'focus:outline-none disabled:opacity-25': isInputEmpty
+      }"
+    >
+      Search
+    </button>
+  </div>
+</div>

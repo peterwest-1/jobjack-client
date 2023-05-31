@@ -1,0 +1,5 @@
+query EntryFlat($pageOffset: Int!, $pageSize: Int!, $path: String) {
+  entryFlat(pageOffset: $pageOffset, pageSize: $pageSize, path: $path) {
+    ...EntryFlatResponse
+  }
+}

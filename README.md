@@ -4,8 +4,13 @@
 
 - [ ] Perhaps a back button
 - [ ] Scrolling without moving header
+- [x] Mobile-ish
+- [ ] Find a better way to handle Fragments with the entries
+- [ ] Add loading states if time allows
 
-- [ ] Mobile
+## Issues
+
+- [ ] Pressing enter doesnt submit form
 
 ## Default Angular Stuff
 

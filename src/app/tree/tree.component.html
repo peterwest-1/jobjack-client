@@ -1,42 +1,51 @@
-<ul>
-  <li *ngFor="let item of data?.children">
-    <div class="border rounded mb-2">
-      <div class="flex flex-row gap-4 justify-center p-2">
-        <span
-          (click)="item.isDirectory && onPathClick(item)"
-          [ngClass]="{
-            'hover:border hover:rounded hover:cursor-pointer': item.isDirectory
-          }"
-          class="font-bold"
-          >{{ item.name }}</span
+<div class="relative isolate px-6 pt-2 lg:px-8">
+  <div class="mx-auto max-w-2xl py-8 sm:py-16 lg:py-24">
+    <div class="text-center">
+      <div
+        class="flex flex-row justify-center items-center gap-4 mb-4 border-b pb-2"
+      >
+        <a
+          routerLink="/flat"
+          class="w-full items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 focus:outline-none disabled:opacity-25"
         >
-        <div *ngIf="item.isDirectory">
-          <app-folder-icon></app-folder-icon>
-        </div>
-        <div *ngIf="!item.isDirectory">
-          <app-file-icon></app-file-icon>
-        </div>
+          Flat
+        </a>
+        <a
+          routerLink="/"
+          class="w-full items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 focus:outline-none disabled:opacity-25"
+        >
+          Home
+        </a>
+        <a
+          routerLink="/tree"
+          class="w-full items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 focus:outline-none disabled:opacity-25"
+        >
+          Tree
+        </a>
       </div>
+      <h1
+        class="text-4xl mb-4 font-bold tracking-tight text-gray-900 sm:text-6xl mt-8"
+      >
+        Tree | Directory Information
+      </h1>
+      <app-search-form
+        (newItemEvent)="onDirectoryPathChanged($event)"
+      ></app-search-form>
+      <!-- See if there's time to implement -->
+      <!-- <app-directory-breadcrumb></app-directory-breadcrumb> -->
+      <div *ngIf="entry | async as data">
+        <ng-container>
+          <app-tree-list
+            *ngIf="!error; else errorMessage"
+            [data]="data"
+            (pathClick)="onDirectoryPathChanged($event)"
+          ></app-tree-list>
 
-      <div>
-        <p>{{ item.path }}</p>
-        <p>{{ item.permissions }}</p>
-        <p>
-          {{ item.size / 1024 | number : "1.1-1" }}
-          <span class="font-semibold">KB</span>
-        </p>
-        <p>
-          <span class="font-semibold">Created At: </span
-          >{{ item.createdAt | date : "short" }}
-        </p>
-        <p *ngIf="item.extension">
-          <span class="font-semissbold">Extension </span>{{ item.extension }}
-        </p>
+          <ng-template #errorMessage>
+            <p class="text-red-600">{{ error }}</p>
+          </ng-template>
+        </ng-container>
       </div>
-
-      <ng-container *ngIf="item.isDirectory">
-        <app-tree [data]="item" (pathClick)="onPathClick($event)"></app-tree>
-      </ng-container>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
