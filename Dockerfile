@@ -1,11 +1,24 @@
 
 FROM node:16-alpine AS build
+
 WORKDIR /app
 
-COPY . .
+COPY package*.json ./
+
 RUN npm ci
-RUN npm run build
-# Serve Application using Nginx Server
-FROM nginx:alpine
-COPY --from=build /app/dist/jobjack-client/ /usr/share/nginx/html
+
+COPY . .
+
+RUN npm run build --prod
+
+FROM nginx:1.21-alpine
+
+COPY --from=build /app/dist/jobjack-client /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx.conf /etc/nginx/conf.d
+
 EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

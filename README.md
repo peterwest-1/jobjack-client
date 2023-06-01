@@ -1,16 +1,19 @@
-# JobJackClient
+# JobJack Client
 
-## TODO:
+## Using
 
-- [ ] Perhaps a back button
-- [ ] Scrolling without moving header
-- [x] Mobile-ish
-- [ ] Find a better way to handle Fragments with the entries
-- [ ] Add loading states if time allows
+- Angular
+- GraphQL
+- Apollo GraphQL
+- Apollo Angular
+- @graphql-codegen
+- Tailwind CSS
 
 ## Issues
 
-- [ ] Pressing enter doesnt submit form
+- [ ] `apollo.config.js` and `graphql.module.ts` use hardcoded values for the graphql endpoint. Consider changing to environment values for future
+  - Currently both are `localhost:3000/graphql`
+- [ ] Pressing enter doesn't submit form on search bar
 
 ## Default Angular Stuff
 
