@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
 import { environment } from 'src/environments/environment';
 
-const uri = environment.graphqlEndpoint; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+  const uri = environment.graphqlEndpoint; // <-- add the URL of the GraphQL server here
+  console.log(uri);
   return {
     link: httpLink.create({ uri }),
     cache: new InMemoryCache(),

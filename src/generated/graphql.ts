@@ -60,13 +60,20 @@ export type EntryTree = {
 
 export type Query = {
   __typename?: 'Query';
+  entryBFS: Array<EntryFlat>;
   entryFlat: Array<EntryFlat>;
   entryTree: EntryTree;
 };
 
+export type QueryEntryBfsArgs = {
+  pageOffset?: Scalars['Int']['input'];
+  pageSize?: Scalars['Int']['input'];
+  path?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type QueryEntryFlatArgs = {
-  pageOffset: Scalars['Int']['input'];
-  pageSize: Scalars['Int']['input'];
+  pageOffset?: Scalars['Int']['input'];
+  pageSize?: Scalars['Int']['input'];
   path?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -96,6 +103,27 @@ export type EntryTreeResponseFragment = {
   isDirectory: boolean;
   createdAt: any;
   permissions?: string | null;
+};
+
+export type EntryBfsQueryVariables = Exact<{
+  path?: InputMaybe<Scalars['String']['input']>;
+  pageSize: Scalars['Int']['input'];
+  pageOffset: Scalars['Int']['input'];
+}>;
+
+export type EntryBfsQuery = {
+  __typename?: 'Query';
+  entryBFS: Array<{
+    __typename?: 'EntryFlat';
+    name: string;
+    link: string;
+    path: string;
+    size: number;
+    extension?: string | null;
+    isDirectory: boolean;
+    createdAt: any;
+    permissions?: string | null;
+  }>;
 };
 
 export type EntryFlatQueryVariables = Exact<{
@@ -173,6 +201,28 @@ export const EntryTreeResponseFragmentDoc = gql`
     permissions
   }
 `;
+export const EntryBfsDocument = gql`
+  query EntryBFS($path: String, $pageSize: Int!, $pageOffset: Int!) {
+    entryBFS(path: $path, pageSize: $pageSize, pageOffset: $pageOffset) {
+      ...EntryFlatResponse
+    }
+  }
+  ${EntryFlatResponseFragmentDoc}
+`;
+
+@Injectable({
+  providedIn: 'root',
+})
+export class EntryBfsGQL extends Apollo.Query<
+  EntryBfsQuery,
+  EntryBfsQueryVariables
+> {
+  override document = EntryBfsDocument;
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}
 export const EntryFlatDocument = gql`
   query EntryFlat($pageOffset: Int!, $pageSize: Int!, $path: String) {
     entryFlat(pageOffset: $pageOffset, pageSize: $pageSize, path: $path) {

@@ -1,0 +1,5 @@
+query EntryBFS($path: String, $pageSize: Int!, $pageOffset: Int!) {
+  entryBFS(path: $path, pageSize: $pageSize, pageOffset: $pageOffset) {
+    ...EntryFlatResponse
+  }
+}
