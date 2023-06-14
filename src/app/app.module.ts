@@ -19,6 +19,8 @@ import { PaginationGroupComponent } from './pagination-group/pagination-group.co
 import { SearchFormComponent } from './search-form/search-form.component';
 import { TreeListComponent } from './tree-list/tree-list.component';
 import { TreeComponent } from './tree/tree.component';
+import { OptimizedComponent } from './optimized/optimized.component';
+import { HomeButtonComponent } from './home-button/home-button.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { TreeComponent } from './tree/tree.component';
     FileFolderIconComponent,
     FileFolderListItemComponent,
     NavGroupComponent,
+    OptimizedComponent,
+    HomeButtonComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,27 @@
 import { Component } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import { EntryFlatGQL, EntryFlatQuery } from 'src/generated/graphql';
+import { EntryBfsGQL, EntryBfsQuery } from 'src/generated/graphql';
 
 @Component({
-  selector: 'app-flat',
-  templateUrl: './flat.component.html',
+  selector: 'app-optimized',
+  templateUrl: './optimized.component.html',
 })
-export class FlatComponent {
-  constructor(private entryFlatGQL: EntryFlatGQL) {}
+export class OptimizedComponent {
+  constructor(private entryBfsGQL: EntryBfsGQL) {}
 
-  entries: Observable<EntryFlatQuery['entryFlat']>;
+  entries: Observable<EntryBfsQuery['entryBFS']>;
   error?: string;
 
   pageOffset = 0;
 
-  //Change to use RxJS properly, mroe declarative
-  //Consider putting in service?
-  //Only used here, though
   private getEntryData(pageOffset: number, path?: string): void {
-    const query = this.entryFlatGQL.watch({
+    const query = this.entryBfsGQL.watch({
       path,
       pageOffset: this.pageOffset,
       pageSize: 10,
     });
     this.entries = query.valueChanges.pipe(
-      map((result) => result.data.entryFlat),
+      map((result) => result.data.entryBFS),
       catchError((error) => {
         this.error = error || 'Error, probably shouldnt get here';
         //Not exactly sure what this does, read up on it
@@ -49,6 +46,7 @@ export class FlatComponent {
     this.getEntryData(this.pageOffset, path);
   }
 }
+
 //FIND BETTER WAY
 const EMPTY = [
   {
